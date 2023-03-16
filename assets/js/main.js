@@ -89,6 +89,7 @@ function handleShowCart(){
       
       printProductsInCart(bDatos)
       printTotal(bDatos)
+      handlePrintAmountProduct(bDatos)
      }
     });
  
@@ -169,6 +170,7 @@ function handleProductsInCart(bDatos){
      window.localStorage.setItem("cart", JSON.stringify(bDatos.cart))
      printProductsInCart(bDatos)
      printTotal(bDatos)
+     handlePrintAmountProduct(bDatos)
 
    })
 }
@@ -224,12 +226,26 @@ function handleTotal(bDatos){
      printTotal(bDatos) 
      printProductsInCart(bDatos)
      printProducts(bDatos);
+     handlePrintAmountProduct(bDatos)
    })
 
 }
 
 
+function handlePrintAmountProduct(bDatos){
+    const amountProducts = document.querySelector('.amountProducts')
 
+   let amount = 0
+   for (const product in bDatos.cart) {
+        
+     amount += bDatos.cart[product].amount
+
+
+   }
+   
+     amountProducts.textContent = amount
+
+}
 
 
 
@@ -247,12 +263,21 @@ async function main(){
    handleProductsInCart(bDatos)
    printTotal(bDatos)
    handleTotal(bDatos)
+   handlePrintAmountProduct(bDatos)
+  
    
 
    
-    
 
      
 }  
 main(); 
+
+
+const iconMenu = document.querySelector('.bx-menu')
+const menu = document.querySelector('.menu')
+iconMenu.addEventListener('click', function(){
+    menu.classList.toggle('menu_show')
+})
+
 
